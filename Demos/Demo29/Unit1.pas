@@ -10,7 +10,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtDlgs, StdCtrls, ExtCtrls, PythonEngine,
+  Dialogs, ExtDlgs, StdCtrls, ExtCtrls, Vcl.Imaging.pngimage, PythonEngine,
   PythonGUIInputOutput;
 
 type
@@ -26,6 +26,7 @@ type
     chkUseDC: TCheckBox;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -117,6 +118,11 @@ begin
     Image1.Picture.Bitmap.SetSize(Image1.Height, Image1.Width);
     _dib.expose(NativeInt(Image1.Picture.Bitmap.Canvas.Handle));
   end;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  Caption := 'Pyton4Delphi and CrossVCL - ' + TOSVersion.ToString;
 end;
 
 end.

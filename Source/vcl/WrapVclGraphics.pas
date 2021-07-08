@@ -841,7 +841,9 @@ begin
   with GetPythonEngine do begin
     if PyArg_ParseTuple( args, 'ii:LoadFromResourceID',@_instance, @_resID ) <> 0 then
     begin
+      {$IFNDEF CROSSVCL}
       DelphiObject.LoadFromResourceID(_instance, _resID);
+      {$ENDIF}
       Result := ReturnNone;
     end
     else

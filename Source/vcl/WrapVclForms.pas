@@ -370,7 +370,9 @@ uses
 { Global Functions }
 function FreeConsole_Wrapper(pself, args: PPyObject): PPyObject; cdecl;
 begin
+  {$IFNDEF CROSSVCL}
   FreeConsole;
+  {$ENDIF}
   Result := GetPythonEngine.ReturnNone;
 end;
 

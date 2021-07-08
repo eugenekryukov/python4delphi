@@ -195,8 +195,8 @@ type
 
 // wchar_t is 4 bytes on Linux/OS X/Android but 2 bytes on Windows
 {$IFDEF POSIX}
-  PWCharT = PUCSChar;
-  PPWCharT = PUCSChar^;
+  PWCharT = PUCS4Char;
+  PPWCharT = ^PUCS4Char;
   WCharTString = UCS4String;
 {$ELSE}
   PWCharT = PWideChar;
@@ -3987,6 +3987,7 @@ var
   i : Integer;
 begin
   inherited;
+  ProgramName              := ''; // Requires on Linux
   FInitScript              := TstringList.Create;
   FClients                 := TList.Create;
   FRedirectIO              := True;
@@ -4393,7 +4394,7 @@ begin
     else
       TempS := ParamStr(I);
     {$IFDEF POSIX}
-    WL := UnicodeStringToUCS4String(TempS);
+    WL[I] := UnicodeStringToUCS4String(TempS);
     {$ELSE}
     WL[I] := UnicodeString(TempS);
     {$ENDIF}
